@@ -577,6 +577,7 @@ footer {
 .footer--container {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
+	margin-bottom: -3rem;
 }
 
 .footer--container>* {
@@ -602,10 +603,8 @@ footer {
 	cursor: pointer;
 }
 
-.footer--copyright {
+.footer--copyright,a {
 	font-size: 1.4rem;
-}
-.footer--copyright a{
 	color: #E6ECF8;
     text-decoration: none;
     background-color: transparent;
