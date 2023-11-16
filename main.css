@@ -578,6 +578,7 @@ footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 	margin-bottom: -3rem;
+	min-height: 300;
 }
 
 .footer--container>* {
