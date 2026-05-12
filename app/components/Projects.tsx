@@ -5,7 +5,8 @@ const projects = [
       "Complete ecommerce store for sports nutrition and fitness products. Built on Shopify with custom theme development and conversion optimization.",
     tags: ["Shopify", "Ecommerce", "CRO"],
     category: "Ecommerce",
-    image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/fit_market_peru_1024x.png?v=1642393148"
+    image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/fit_market_peru_1024x.png?v=1642393148",
+    url: "https://fitmarketperu.com",
   },
   {
     title: "Entre Lanas",
@@ -13,7 +14,8 @@ const projects = [
       "Online boutique for artisanal yarn and knitting supplies. Custom Shopify store with a focus on product discovery and community.",
     tags: ["Shopify", "Theme Dev", "UX"],
     category: "Ecommerce",
-    image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/entre_lanas_62ffef03-6a30-4ea5-8fb6-5b477b60e3e2_1024x.png?v=1642393139"
+    image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/entre_lanas_62ffef03-6a30-4ea5-8fb6-5b477b60e3e2_1024x.png?v=1642393139",
+    url: "https://entrelanas.com",
   },
   {
     title: "Donna Cattiva",
@@ -22,6 +24,7 @@ const projects = [
     tags: ["Shopify", "HTML5", "CSS3", "JavaScript"],
     category: "Ecommerce",
     image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/image_404_1024x.png?v=1642393132",
+    url: "https://donnacattiva.com",
   },
   {
     title: "VetPet Box",
@@ -29,7 +32,8 @@ const projects = [
       "Subscription box service for pet owners. Shopify subscription integration with recurring billing and customer portal.",
     tags: ["Shopify", "Javascript", "LIQUID"],
     category: "Ecommerce",
-    image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/Screen_Shot_2022-01-16_at_23.18.12_1024x.png?v=1642393121"
+    image: "https://cdn.shopify.com/s/files/1/0544/0743/0319/files/Screen_Shot_2022-01-16_at_23.18.12_1024x.png?v=1642393121",
+    url: "https://vetpetbox.com",
   },
 ];
 
@@ -48,9 +52,12 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
-            <div
+            <a
               key={project.title}
-              className="group relative bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all hover:-translate-y-1"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all hover:-translate-y-1 block"
             >
               <div
                 className={`h-48 ${
@@ -86,7 +93,7 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

@@ -3,21 +3,30 @@
 import { useState, FormEvent } from "react";
 
 export default function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    const subject = encodeURIComponent(`Message from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-    );
-    window.location.href = `mailto:edwin.caceressilva@gmail.com?subject=${subject}&body=${body}`;
-    setTimeout(() => {
-      setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-    }, 500);
+
+    try {
+      const res = await fetch("https://formspree.io/f/mqknvzqp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -81,12 +90,14 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 space-y-5"
           >
+
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Name
               </label>
               <input
                 type="text"
+                name="name"
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -100,6 +111,7 @@ export default function Contact() {
               </label>
               <input
                 type="email"
+                name="email"
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -112,6 +124,7 @@ export default function Contact() {
                 Message
               </label>
               <textarea
+                name="message"
                 required
                 rows={5}
                 value={form.message}
@@ -122,18 +135,23 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              disabled={status === "sending"}
+              disabled={status === "sending" || status === "sent"}
               className="w-full px-6 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white rounded-lg font-medium transition-colors"
             >
               {status === "sending"
-                ? "Opening email..."
+                ? "Sending..."
                 : status === "sent"
-                  ? "Message prepared!"
+                  ? "Message sent!"
                   : "Send Message"}
             </button>
             {status === "sent" && (
               <p className="text-sm text-center text-emerald-600 dark:text-emerald-400">
-                Your email client should have opened. Thanks for reaching out!
+                Thanks for reaching out — I&apos;ll get back to you soon.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="text-sm text-center text-red-500">
+                Something went wrong. Please try again or email me directly.
               </p>
             )}
           </form>
