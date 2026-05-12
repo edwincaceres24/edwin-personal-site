@@ -3,7 +3,7 @@ export default function Hero() {
     <section className="min-h-screen flex items-center pt-16">
       <div className="max-w-6xl mx-auto px-6 py-24 w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="order-2 md:order-1">
             <span className="inline-block text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-4 tracking-wide uppercase">
               Ecommerce Consultant
             </span>
@@ -72,8 +72,8 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hidden md:flex justify-center">
-            <div className="relative w-80 h-80">
+          <div className="flex justify-center order-1 md:order-2">
+            <div className="relative w-52 h-52 md:w-80 md:h-80">
               <div className="absolute inset-0 bg-indigo-100 dark:bg-indigo-900/30 rounded-full" />
               <div className="absolute inset-4 rounded-full overflow-hidden">
                 <img
